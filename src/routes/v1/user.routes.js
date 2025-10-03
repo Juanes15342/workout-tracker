@@ -1,48 +1,31 @@
-const express = require("express");
+// src/routes/v1/users.router.js
+const express = require('express');
 const router = express.Router();
+const users = require('../../data/users');
 
-// GET /users → listar todos los usuarios
-router.get("/", (req, res) => {
-  res.send("Lista de usuarios");
+// GET /api/v1/users
+router.get('/', (req, res) => {
+  // Respuesta 200 con la lista completa
+  return res.status(200).json(users);
 });
 
-// GET /users/:id → obtener usuario por ID
-router.get("/:id", (req, res) => {
-  res.send(`Usuario con ID: ${req.params.id}`);
-});
+// GET /api/v1/users/:id
+router.get('/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
 
-// POST /users → crear un usuario
-router.post("/", (req, res) => {
-  res.send("Usuario creado");
-});
+  // Validación sencilla: id numérico
+  if (Number.isNaN(id)) {
+    return res.status(400).json({ message: 'ID inválido. Debe ser un número.' });
+  }
 
-// PUT /users/:id → actualizar usuario completo
-router.put("/:id", (req, res) => {
-  res.send(`Usuario con ID ${req.params.id} actualizado completamente`);
-});
+  const user = users.find(u => u.id === id);
+  if (!user) {
+    // 404 si no existe
+    return res.status(404).json({ message: 'Usuario no encontrado' });
+  }
 
-// PATCH /users/:id → actualización parcial
-router.patch("/:id", (req, res) => {
-  res.send(`Usuario con ID ${req.params.id} actualizado parcialmente`);
-});
-
-// DELETE /users/:id → eliminar usuario
-router.delete("/:id", (req, res) => {
-  res.send(`Usuario con ID ${req.params.id} eliminado`);
+  // 200 con el usuario
+  return res.status(200).json(user);
 });
 
 module.exports = router;
-
-const express = require("express");
-const userRoutes = require("./src/routes/v1/user.routes");
-
-const app = express();
-app.use(express.json());
-
-// Prefijo de versión
-app.use("/api/v1/users", userRoutes);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
