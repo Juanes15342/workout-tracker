@@ -17,4 +17,11 @@ const createProgress = (newProgress) => {
   return progressItem;
 };
 
-module.exports = { progress, createProgress, updateProgress };
+const deleteProgress = (id) => {
+  const index = progress.findIndex((p) => p.id === id);
+  if (index === -1) return false;
+  progress.splice(index, 1);
+  return true;
+};
+
+module.exports = { progress, createProgress, updateProgress, deleteProgress };
