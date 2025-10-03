@@ -19,12 +19,11 @@ router.get("/", listExercises);
 router.get("/:id", getExercise);
 
 // Ruta POST
-router.post("/", addExercise);
+const validateId = require("../../middlewares/validateId");
 
-router.put("/:id", editExercise);
-
-router.patch("/:id", editExercise);
-
-router.delete("/:id", removeExercise);
+router.get("/:id", validateId, getExercise);
+router.put("/:id", validateId, editExercise);
+router.patch("/:id", validateId, editExercise);
+router.delete("/:id", validateId, removeExercise);
 
 module.exports = router;

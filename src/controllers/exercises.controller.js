@@ -3,7 +3,7 @@ const {
   getExerciseById,
   createExercise,
   updateExercise,
-   deleteExercise
+ deleteExercise
 } = require("../data/exercises");
 
 // GET lista
@@ -24,9 +24,11 @@ const getExercise = (req, res) => {
 // POST crear
 const addExercise = (req, res) => {
   const { name, reps, sets } = req.body;
-  if (!name || !reps || !sets) {
-    return res.status(400).json({ message: "Missing fields" });
-  }
+  if (!name || typeof reps !== "number" || typeof sets !== "number") {
+  return res.status(400).json({
+    message: "Invalid input: name (string), reps (number), sets (number) are required"
+  });
+}
   const newExercise = createExercise({ name, reps, sets });
   res.status(201).json(newExercise);
 };
