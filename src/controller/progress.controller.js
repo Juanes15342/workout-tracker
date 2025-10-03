@@ -37,4 +37,4 @@ const removeProgress = (req, res) => {
   res.json({ message: "Progreso eliminado" });
 };
 
-module.exports = { listProgress, getProgress, addProgress, editProgress, removeProgress };
+module.exports = { listProgress, getProgress, addProgress, editProgress, removeProgress }}
