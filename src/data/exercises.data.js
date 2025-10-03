@@ -18,8 +18,19 @@ const createExercise = (exercise) => {
   return newExercise;
 };
 
+
+
+const updateExercise = (id, updates) => {
+  const index = exercises.findIndex((ex) => ex.id === id);
+  if (index === -1) return null;
+
+  exercises[index] = { ...exercises[index], ...updates };
+  return exercises[index];
+};
+
 module.exports = {
   getAllExercises,
   getExerciseById,
-  createExercise
+  createExercise,
+  updateExercise   // 👈 agregar en exports
 };

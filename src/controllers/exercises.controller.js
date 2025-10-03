@@ -1,7 +1,8 @@
 const {
   getAllExercises,
   getExerciseById,
-  createExercise
+  createExercise,
+  updateExercise
 } = require("../data/exercises");
 
 // GET lista
@@ -29,8 +30,21 @@ const addExercise = (req, res) => {
   res.status(201).json(newExercise);
 };
 
+const editExercise = (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  const updated = updateExercise(Number(id), updates);
+  if (!updated) {
+    return res.status(404).json({ message: "Exercise not found" });
+  }
+
+  res.json(updated);
+};
+
 module.exports = {
   listExercises,
   getExercise,
-  addExercise
+  addExercise,
+  editExercise   
 };
