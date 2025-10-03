@@ -1,4 +1,4 @@
-const { progress } = require("../data/progress");
+const { progress, createProgress, updateProgress} = require("../data/progress");
 
 // Listar progreso
 const listProgress = (req, res) => {
@@ -25,4 +25,11 @@ const addProgress = (req, res) => {
   res.status(201).json(newProgress);
 };
 
-module.exports = { listProgress, getProgress, addProgress };
+const editProgress = (req, res) => {
+  const id = parseInt(req.params.id);
+  const updated = updateProgress(id, req.body);
+  if (!updated) return res.status(404).json({ message: "Progreso no encontrado" });
+  res.json(updated);
+};
+
+module.exports = { listProgress, getProgress, addProgress, editProgress };
