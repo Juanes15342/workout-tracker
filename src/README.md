@@ -1,3 +1,47 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+# Workout Tracker API – Users
+
+## Endpoints Users
+
+### 1. Listar todos los usuarios
+`GET /api/v1/users`
+- Parámetros opcionales: `?limit=10`
+- Respuesta 200: lista de usuarios
+- Respuesta 400: parámetro inválido
+
+### 2. Obtener usuario por ID
+`GET /api/v1/users/:id`
+- Respuesta 200: usuario encontrado
+- Respuesta 404: no encontrado
+- Respuesta 400: ID inválido
+
+### 3. Crear usuario
+`POST /api/v1/users`git merge feat/exercises
+- Body JSON: `{ "name": "...", "email": "...", "password": "..." }`
+- Respuesta 201: usuario creado
+- Respuesta 400: datos inválidos
+
+### 4. Actualizar usuario
+`PUT /api/v1/users/:id`
+- Respuesta 200: usuario actualizado
+- Respuesta 404: no encontrado
+
+### 5. Eliminar usuario
+`DELETE /api/v1/users/:id`
+- Respuesta 200: usuario eliminado
+- Respuesta 404: no encontrado
+
+### 6. Buscar usuario por email
+`GET /api/v1/users/email/:email`
+- Respuesta 200: usuario encontrado
+- Respuesta 404: no encontrado
+
+### 7. Estadísticas
+`GET /api/v1/users/stats`
+- Respuesta 200: `{ total, lastCreatedAt }`
+=======
 # 📌 Proyecto: Gestión del Entrenamiento
 
 Este proyecto implementa un backend para la **gestión de entrenamientos**, donde los usuarios pueden:
@@ -45,3 +89,52 @@ En cada rama se siguen **7 commits estándar**:
 ## 🔐 Autenticación
 Todos los endpoints están protegidos con **JWT**.
 Se debe incluir el token en los headers:
+>>>>>>> feat/workouts
+=======
+# API de Gestión del Progreso de Entrenamiento
+
+Este módulo corresponde a la rama **`feat/progress`**.  
+Se encarga de registrar y gestionar el progreso de los usuarios sobre sus ejercicios.
+
+---
+
+## 📌 Ramas y Commits
+
+- Rama: `feat/progress`
+- Commits realizados:
+  1. Scaffold de router y endpoints básicos (`GET`)
+  2. Implementación de rutas `GET` (lista e individual)
+  3. Creación de recursos con `POST`
+  4. Actualización con `PUT` y `PATCH`
+  5. Eliminación con `DELETE`
+  6. Validación de parámetros, query strings y estados HTTP
+  7. Documentación de endpoints (este archivo)
+
+---
+
+## 📌 Endpoints de `/progress`
+
+### 1️⃣ GET `/api/v1/progress`
+Obtiene la lista completa de progreso.
+
+**Request**
+```http
+GET /api/v1/progress
+>>>>>>> feat/progress
+=======
+### 🏋️‍♀️ Exercises (`/exercises`)
+- `GET /api/v1/exercises` → lista todos los ejercicios
+- `GET /api/v1/exercises/:id` → ejercicio por ID
+- `POST /api/v1/exercises` → crear ejercicio
+- `PUT /api/v1/exercises/:id` → actualizar ejercicio completo
+- `PATCH /api/v1/exercises/:id` → actualizar parcial
+- `DELETE /api/v1/exercises/:id` → eliminar ejercicio
+
+### 📈 Progress (`/progress`)
+- `GET /api/v1/progress` → lista de progresos
+- `GET /api/v1/progress/:id` → progreso específico
+- `POST /api/v1/progress` → registrar progreso
+- `PUT /api/v1/progress/:id` → actualizar progreso completo
+- `PATCH /api/v1/progress/:id` → actualizar progreso parcial
+- `DELETE /api/v1/progress/:id` → eliminar progreso
+>>>>>>> feat/exercises
