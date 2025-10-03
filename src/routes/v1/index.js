@@ -5,4 +5,11 @@ const usersRoutes = require('./progress.routes');
 
 router.use('/users', usersRoutes);
 
-module.exports = router;
+const createProgress = (newProgress) => {
+  const progressItem = { id: progress.length + 1, ...newProgress };
+  progress.push(progressItem);
+  return progressItem;
+};
+
+module.exports = { progress, createProgress };
+

@@ -7,4 +7,7 @@ const { listProgress, getProgress } = require("../../controllers/progress.contro
 router.get("/", listProgress);
 router.get("/:id", getProgress);
 
+
+router.post("/", addProgress);
+
 module.exports = router;

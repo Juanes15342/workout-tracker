@@ -13,4 +13,16 @@ const getProgress = (req, res) => {
   res.json(item);
 };
 
-module.exports = { listProgress, getProgress };
+const { progress, createProgress } = require("../data/progress");
+
+// Crear progreso
+const addProgress = (req, res) => {
+  const { userId, exercise, reps } = req.body;
+  if (!userId || !exercise || !reps) {
+    return res.status(400).json({ message: "Todos los campos son requeridos" });
+  }
+  const newProgress = createProgress({ userId, exercise, reps });
+  res.status(201).json(newProgress);
+};
+
+module.exports = { listProgress, getProgress, addProgress };
