@@ -1,19 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { listProgress, getProgress,addProgress,editProgress, removeProgress } = require("../../controllers/progress.controller");
+const progressController = require("../../controllers/progress.controller");
 
-// Rutas GET básicas
-router.get("/", listProgress);
-router.get("/:id", getProgress);
-
-
-router.post("/", addProgress);
-
-router.put("/:id", editProgress);
-router.patch("/:id", editProgress);
-
-router.delete("/:id", removeProgress);
-
+// ENDPOINTS
+router.get("/", progressController.getProgress);          // listar progreso
+router.get("/:id", progressController.getProgressById);   // obtener por id
+router.post("/", progressController.createProgress);      // crear progreso
+router.put("/:id", progressController.updateProgress);    // actualizar completo
+router.patch("/:id", progressController.patchProgress);   // actualización parcial
+router.delete("/:id", progressController.deleteProgress); // eliminar
 
 module.exports = router;

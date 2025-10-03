@@ -4,8 +4,10 @@ const router = express.Router();
 const {
   listExercises,
   getExercise,
-  addExercise
+  addExercise,
+  editExercise
 } = require("../../controllers/exercises.controller");
+const { getAllExercises, deleteExercise } = require("../../data/exercises");
 
 const updateExercise = (id, updates) => {
   const index = exercises.findIndex((ex) => ex.id === id);
@@ -14,16 +16,20 @@ const updateExercise = (id, updates) => {
   exercises[index] = { ...exercises[index], ...updates };
   return exercises[index];
 };
+
+const validateId = require("../../middlewares/validateId");
 // Rutas GET
-router.get("/", listExercises);
-router.get("/:id", getExercise);
+router.get("/", getAllExercises);
+router.get("/:id", validateId, getExercise);
 
 // Ruta POST
-const validateId = require("../../middlewares/validateId");
+router.post("/",addExercise);
 
-router.get("/:id", validateId, getExercise);
-router.put("/:id", validateId, editExercise);
-router.patch("/:id", validateId, editExercise);
-router.delete("/:id", validateId, removeExercise);
+// Ruta PUT y PATCH
+router.put("/:id", validateId, updateExercise);
+router.patch("/:id", validateId, editExercise );
+
+// Ruta DELETE
+router.delete("/:id", validateId,deleteExercise );
 
 module.exports = router;

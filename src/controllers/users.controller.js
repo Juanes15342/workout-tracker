@@ -67,7 +67,7 @@ function getUsers(req, res) {
 
 
 
-mmodule.exports = {
+module.exports = {
   createUser,
   updateUser,
   deleteUser,
