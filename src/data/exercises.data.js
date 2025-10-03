@@ -28,9 +28,17 @@ const updateExercise = (id, updates) => {
   return exercises[index];
 };
 
+const deleteExercise = (id) => {
+  const index = exercises.findIndex((ex) => ex.id === id);
+  if (index === -1) return false;
+  exercises.splice(index, 1);
+  return true;
+};
+
 module.exports = {
   getAllExercises,
   getExerciseById,
   createExercise,
-  updateExercise   // 👈 agregar en exports
+  updateExercise,
+  deleteExercise   // 👈 agregar en exports
 };

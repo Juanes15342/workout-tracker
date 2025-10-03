@@ -2,7 +2,8 @@ const {
   getAllExercises,
   getExerciseById,
   createExercise,
-  updateExercise
+  updateExercise,
+   deleteExercise
 } = require("../data/exercises");
 
 // GET lista
@@ -42,9 +43,21 @@ const editExercise = (req, res) => {
   res.json(updated);
 };
 
+const removeExercise = (req, res) => {
+  const { id } = req.params;
+  const success = deleteExercise(Number(id));
+
+  if (!success) {
+    return res.status(404).json({ message: "Exercise not found" });
+  }
+
+  res.json({ message: "Exercise deleted successfully" });
+};
+
 module.exports = {
   listExercises,
   getExercise,
   addExercise,
-  editExercise   
+  editExercise,
+  removeExercise   // 👈 exportar
 };

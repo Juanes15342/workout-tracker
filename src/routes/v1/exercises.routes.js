@@ -25,4 +25,6 @@ router.put("/:id", editExercise);
 
 router.patch("/:id", editExercise);
 
+router.delete("/:id", removeExercise);
+
 module.exports = router;
