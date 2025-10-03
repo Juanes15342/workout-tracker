@@ -1,13 +1,23 @@
-const deleteWorkout = (req, res) => {
-  const { id } = req.params;
-  const index = workouts.findIndex(w => w.id === parseInt(id));
-  if (index === -1) return res.status(404).json({ error: "Entrenamiento no encontrado" });
+const createWorkout = (req, res) => {
+  const { title, date, exercises } = req.body;
 
-  workouts.splice(index, 1);
-  return res.status(204).send();
-};
+  if (!title || typeof title !== "string") {
+    return res.status(400).json({ error: "El título es requerido y debe ser texto" });
+  }
+  if (!date || isNaN(Date.parse(date))) {
+    return res.status(400).json({ error: "La fecha es requerida y debe ser válida" });
+  }
+  if (!Array.isArray(exercises)) {
+    return res.status(400).json({ error: "Ejercicios debe ser un array" });
+  }
 
-module.exports = {
-  ...module.exports,
-  deleteWorkout,
+  const newWorkout = {
+    id: currentId++,
+    title,
+    date,
+    exercises,
+  };
+
+  workouts.push(newWorkout);
+  return res.status(201).json(newWorkout);
 };
