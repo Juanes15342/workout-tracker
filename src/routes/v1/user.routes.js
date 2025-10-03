@@ -70,7 +70,7 @@ router.put('/:id', updateUser);
 
  router.delete('/:id', deleteUser);
 
- router.get('/email/:email', getUserByEmail);
+ router.get('/', getUsers)
 
 module.exports = router;
 
