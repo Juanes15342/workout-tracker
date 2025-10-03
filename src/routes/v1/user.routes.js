@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const users = require('../../data/users'); // array simulado
-const { createUser } = require('../../controllers/users.controller');
+const { createUser, updateUser, deleteUser, getUsers } = require('../../controllers/users.controller');
 
 
 // GET /api/v1/users  -> ya implementado

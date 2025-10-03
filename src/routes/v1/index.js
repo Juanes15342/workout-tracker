@@ -4,12 +4,15 @@ const router = express.Router();
 
 const userRoutes = require("./user.routes");
 const workoutRoutes = require("./workouts.routes");
-const usersRoutes = require('./progress.routes');
+const progressRoutes = require('./progress.routes');
 
-const usersRoutes = require('./exercises.routes');feat/exercises
+const exerciseRoutes = require('./exercises.routes');
+const { progress } = require("../../data/progress");
 
+router.use("/progress", progressRoutes);
 router.use("/users", userRoutes);
 router.use("/workouts", workoutRoutes);
+router.use("exercisesa", exerciseRoutes)
 
  
 module.exports = router;
@@ -20,5 +23,5 @@ const createProgress = (newProgress) => {
   return progressItem;
 };
 
-module.exports = { progress, createProgress };
- feat/progress
+module.exports = router;
+ 
