@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+
 const userRoutes = require("./user.routes");
 const workoutRoutes = require("./workouts.routes");
 const usersRoutes = require('./progress.routes');
+
+const usersRoutes = require('./exercises.routes');feat/exercises
 
 router.use("/users", userRoutes);
 router.use("/workouts", workoutRoutes);
