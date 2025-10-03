@@ -1,29 +1,30 @@
-let currentId = 1;
+const updateWorkout = (req, res) => {
+  const { id } = req.params;
+  const index = workouts.findIndex(w => w.id === parseInt(id));
+  if (index === -1) return res.status(404).json({ error: "Entrenamiento no encontrado" });
 
-const createWorkout = (req, res) => {
   const { title, date, exercises } = req.body;
+  workouts[index] = { id: parseInt(id), title, date, exercises };
 
-  const newWorkout = {
-    id: currentId++,
-    title,
-    date,
-    exercises: exercises || [],
-  };
+  return res.json(workouts[index]);
+};
 
-  workouts.push(newWorkout);
-  return res.status(201).json(newWorkout);
+const patchWorkout = (req, res) => {
+  const { id } = req.params;
+  const workout = workouts.find(w => w.id === parseInt(id));
+  if (!workout) return res.status(404).json({ error: "Entrenamiento no encontrado" });
+
+  const { title, date, exercises } = req.body;
+  if (title) workout.title = title;
+  if (date) workout.date = date;
+  if (exercises) workout.exercises = exercises;
+
+  return res.json(workout);
 };
 
 module.exports = {
-  getWorkouts: (req, res) => res.json(workouts),
-  getWorkoutById: (req, res) => {
-    const { id } = req.params;
-    const workout = workouts.find(w => w.id === parseInt(id));
-    if (!workout) return res.status(404).json({ error: "Entrenamiento no encontrado" });
-    return res.json(workout);
-  },
-  createWorkout,
-  updateWorkout: (req, res) => res.json({ message: "no implementado" }),
-  patchWorkout: (req, res) => res.json({ message: "no implementado" }),
-  deleteWorkout: (req, res) => res.json({ message: "no implementado" }),
+  ...module.exports,
+  updateWorkout,
+  patchWorkout,
 };
+
